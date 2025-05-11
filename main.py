@@ -33,11 +33,13 @@ def div():
         z7 = complex(entry7.get())
         z8 = complex(entry8.get())
         wynik = z7 / z8
-        div_label.config(text=f"Result: {wynik}")
+        zaokrąglony = complex(round(wynik.real, 1), round(wynik.imag, 1))
+        div_label.config(text=f"Result: {zaokrąglony}")
     except ValueError:
         messagebox.showerror("Input Error", "Please enter valid complex numbers like (4+5j)!")
     except ZeroDivisionError:
         messagebox.showerror("Math Error", "Cannot divide by zero.")
+
 
 root = tk.Tk()
 root.title("Complex Number Calculator")
@@ -52,6 +54,17 @@ entry2.grid(row=2, column=1, padx=10, pady=5)
 tk.Button(root, text="Add", command=add).grid(row=3, column=0, columnspan=2, pady=5)
 add_label = tk.Label(root, text="Result: ")
 add_label.grid(row=4, column=0, columnspan=2, pady=5)
+
+tk.Label(root, text="Subtraction").grid(row=5, column=0, columnspan=2, pady=10)
+tk.Label(root, text="Number 1:").grid(row=6, column=0, padx=10, pady=5)
+entry3 = tk.Entry(root)
+entry3.grid(row=6, column=1, padx=10, pady=5)
+tk.Label(root, text="Number 2:").grid(row=7, column=0, padx=10, pady=5)
+entry4 = tk.Entry(root)
+entry4.grid(row=7, column=1, padx=10, pady=5)
+tk.Button(root, text="Subtract", command=sub).grid(row=8, column=0, columnspan=2, pady=5)
+sub_label = tk.Label(root, text="Result: ")
+sub_label.grid(row=9, column=0, columnspan=2, pady=5)
 
 tk.Label(root, text="Multiplication").grid(row=0, column=2, columnspan=2, pady=5)
 tk.Label(root, text="Number 1:").grid(row=1, column=2, padx=10, pady=5)
@@ -74,16 +87,5 @@ entry8.grid(row=7, column=3, padx=10, pady=5)
 tk.Button(root, text="Divide", command=div).grid(row=8, column=2, columnspan=2, pady=5)
 div_label = tk.Label(root, text="Result: ")
 div_label.grid(row=9, column=2, columnspan=2, pady=5)
-
-tk.Label(root, text="Subtraction").grid(row=10, column=0, columnspan=4, pady=10)
-tk.Label(root, text="Number 1:").grid(row=11, column=0, padx=10, pady=5)
-entry3 = tk.Entry(root)
-entry3.grid(row=11, column=1, padx=10, pady=5)
-tk.Label(root, text="Number 2:").grid(row=12, column=0, padx=10, pady=5)
-entry4 = tk.Entry(root)
-entry4.grid(row=12, column=1, padx=10, pady=5)
-tk.Button(root, text="Subtract", command=sub).grid(row=13, column=0, columnspan=2, pady=5)
-sub_label = tk.Label(root, text="Result: ")
-sub_label.grid(row=14, column=0, columnspan=4, pady=5)
 
 root.mainloop()

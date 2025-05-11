@@ -33,13 +33,20 @@ def div():
         z7 = complex(entry7.get())
         z8 = complex(entry8.get())
         wynik = z7 / z8
-        zaokrąglony = complex(round(wynik.real, 1), round(wynik.imag, 1))
+        zaokrąglony = complex(round(wynik.real, 0), round(wynik.imag, 0))
         div_label.config(text=f"Result: {zaokrąglony}")
     except ValueError:
         messagebox.showerror("Input Error", "Please enter valid complex numbers like (4+5j)!")
     except ZeroDivisionError:
         messagebox.showerror("Math Error", "Cannot divide by zero.")
 
+def modul():
+    try:
+        z9 = complex(entry9.get())
+        wynik = round(abs(z9),0)
+        modul_label.config(text=f"Result: {wynik}")
+    except ValueError:
+        messagebox.showerror("Input Error", "Please enter valid complex numbers like (4+5j)!")
 
 root = tk.Tk()
 root.title("Complex Number Calculator")
@@ -88,4 +95,11 @@ tk.Button(root, text="Divide", command=div).grid(row=8, column=2, columnspan=2, 
 div_label = tk.Label(root, text="Result: ")
 div_label.grid(row=9, column=2, columnspan=2, pady=5)
 
+tk.Label(root, text="Modulus").grid(row=0, column=4, columnspan=2, pady=5)
+tk.Label(root, text="Give number:").grid(row=1, column=4, padx=10, pady=5)
+entry9 = tk.Entry(root)
+entry9.grid(row=1, column=5, padx=10, pady=5)
+tk.Button(root, text="Modulus", command=modul).grid(row=2, column=4, columnspan=2, pady=5)
+modul_label = tk.Label(root, text="Result: ")
+modul_label.grid(row=3, column=4, columnspan=2, pady=5)
 root.mainloop()

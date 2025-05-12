@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
+import cmath
 
 def add():
     try:
@@ -40,14 +41,27 @@ def div():
     except ZeroDivisionError:
         messagebox.showerror("Math Error", "Cannot divide by zero.")
 
+def calculate_modulus(z):
+    return abs(z)
+
 def modul():
     try:
         z9 = complex(entry9.get())
-        wynik = round(abs(z9),0)
+        wynik = round(calculate_modulus(z9),0)
         modul_label.config(text=f"Result: {wynik}")
     except ValueError:
         messagebox.showerror("Input Error", "Please enter valid complex numbers like (4+5j)!")
+def trigonometric():
+    try:
+        z10 = complex(entry10.get())
+        r = calculate_modulus(z10)
+        phi = cmath.phase(z10)
+        trig_form = f"{round(r, 2)} * (cos({round(phi, 2)}) + i*sin({round(phi, 2)}))"
+        trig_label.config(text=f"Result: {trig_form}")
 
+
+    except ValueError:
+        messagebox.showerror("Input error!", "Please enter valid complex numbers like (4+5j)!")
 root = tk.Tk()
 root.title("Complex Number Calculator")
 
@@ -102,4 +116,12 @@ entry9.grid(row=1, column=5, padx=10, pady=5)
 tk.Button(root, text="Modulus", command=modul).grid(row=2, column=4, columnspan=2, pady=5)
 modul_label = tk.Label(root, text="Result: ")
 modul_label.grid(row=3, column=4, columnspan=2, pady=5)
+
+tk.Label(root, text="Trigonometric form").grid(row=5, column=4, columnspan=2, pady=10)
+tk.Label(root, text="Give number:").grid(row=6, column=4, padx=10, pady=5)
+entry10 = tk.Entry(root)
+entry10.grid(row=6, column=5, padx=10, pady=5)
+tk.Button(root, text="Trigonometric form", command=trigonometric).grid(row=7, column=4, columnspan=2, pady=5)
+trig_label = tk.Label(root, text="Result: ")
+trig_label.grid(row=8, column=4, columnspan=2, pady=5)
 root.mainloop()

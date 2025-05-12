@@ -58,10 +58,21 @@ def trigonometric():
         phi = cmath.phase(z10)
         trig_form = f"{round(r, 2)} * (cos({round(phi, 2)}) + i*sin({round(phi, 2)}))"
         trig_label.config(text=f"Result: {trig_form}")
-
-
     except ValueError:
         messagebox.showerror("Input error!", "Please enter valid complex numbers like (4+5j)!")
+
+def calc_trig(z):
+    return trigonometric()
+
+
+def exponentiation():
+    try:
+        z11 = complex(entry11.get())
+        n = int(entry_power.get())
+        wynik = pow(z11, n)
+        exp_label.config(text=f"Result: {wynik}")
+    except ValueError:
+        messagebox.showerror("Input Error", "Please enter a complex number (e.g., 3+4j) and an integer power.")
 root = tk.Tk()
 root.title("Complex Number Calculator")
 
@@ -124,4 +135,16 @@ entry10.grid(row=6, column=5, padx=10, pady=5)
 tk.Button(root, text="Trigonometric form", command=trigonometric).grid(row=7, column=4, columnspan=2, pady=5)
 trig_label = tk.Label(root, text="Result: ")
 trig_label.grid(row=8, column=4, columnspan=2, pady=5)
+
+tk.Label(root, text="Exponentiation").grid(row=10, column=0, columnspan=2, pady=10)
+tk.Label(root, text="Complex number:").grid(row=11, column=0, padx=10, pady=5)
+entry11 = tk.Entry(root)
+entry11.grid(row=11, column=1, padx=10, pady=5)
+tk.Label(root, text="Power:").grid(row=12, column=0, padx=10, pady=5)
+entry_power = tk.Entry(root)
+entry_power.grid(row=12, column=1, padx=10, pady=5)
+tk.Button(root, text="Exponentiate", command=exponentiation).grid(row=13, column=0, columnspan=2, pady=5)
+exp_label = tk.Label(root, text="Result: ")
+exp_label.grid(row=14, column=0, columnspan=2, pady=5)
+
 root.mainloop()

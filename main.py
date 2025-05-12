@@ -196,5 +196,4 @@ tk.Button(root, text="Calculate n-th Root", command=nth_root).grid(row=13, colum
 nth_root_label = tk.Label(root, text="Results: ")
 nth_root_label.grid(row=14, column=4, columnspan=2, pady=5)
 
-
 root.mainloop()

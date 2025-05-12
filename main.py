@@ -51,6 +51,7 @@ def modul():
         modul_label.config(text=f"Result: {wynik}")
     except ValueError:
         messagebox.showerror("Input Error", "Please enter valid complex numbers like (4+5j)!")
+
 def trigonometric():
     try:
         z10 = complex(entry10.get())
@@ -69,6 +70,15 @@ def exponentiation():
         exp_label.config(text=f"Result: {wynik}")
     except ValueError:
         messagebox.showerror("Input Error", "Please enter a complex number (e.g., 3+4j) and an integer power.")
+
+def root():
+    try:
+        z12 = complex(entry12.get())
+        wynik = cmath.sqrt(z12)
+        root_label.config(text=f"Result: {round(wynik.real, 2)} + {round(wynik.imag, 2)}j")
+    except ValueError:
+        messagebox.showerror("Input Error", "Please enter a valid complex number like (4+5j)!")
+
 root = tk.Tk()
 root.title("Complex Number Calculator")
 
@@ -142,5 +152,13 @@ entry_power.grid(row=12, column=1, padx=10, pady=5)
 tk.Button(root, text="Exponentiate", command=exponentiation).grid(row=13, column=0, columnspan=2, pady=5)
 exp_label = tk.Label(root, text="Result: ")
 exp_label.grid(row=14, column=0, columnspan=2, pady=5)
+
+tk.Label(root, text="Square Root").grid(row=10, column=2, columnspan=2, pady=10)
+tk.Label(root, text="Give number:").grid(row=11, column=2, padx=10, pady=5)
+entry12 = tk.Entry(root)
+entry12.grid(row=11, column=3, padx=10, pady=5)
+tk.Button(root, text="Square Root", command=root).grid(row=12, column=2, columnspan=2, pady=5)
+root_label = tk.Label(root, text="Result: ")
+root_label.grid(row=13, column=2, columnspan=2, pady=5)
 
 root.mainloop()

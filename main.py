@@ -71,13 +71,37 @@ def exponentiation():
     except ValueError:
         messagebox.showerror("Input Error", "Please enter a complex number (e.g., 3+4j) and an integer power.")
 
-def root():
+def square_root():
     try:
         z12 = complex(entry12.get())
         wynik = cmath.sqrt(z12)
         root_label.config(text=f"Result: {round(wynik.real, 2)} + {round(wynik.imag, 2)}j")
     except ValueError:
         messagebox.showerror("Input Error", "Please enter a valid complex number like (4+5j)!")
+
+
+def nth_root():
+    try:
+        z = complex(entry_root.get())
+        n = int(entry_n.get())
+        if n <= 0:
+            messagebox.showerror("Input Error", "The root degree must be a positive integer.")
+            return
+
+        r = abs(z)
+        phi = cmath.phase(z)
+        roots = []
+
+        for k in range(n):
+            angle = (phi + 2 * cmath.pi * k) / n
+            root_val = r ** (1 / n) * complex(cmath.cos(angle), cmath.sin(angle))
+            roots.append(f"{round(root_val.real, 3)} + {round(root_val.imag, 3)}j")
+
+        result_text = "\n".join(f"Root {k + 1}: {val}" for k, val in enumerate(roots))
+        nth_root_label.config(text=f"Results:\n{result_text}")
+
+    except ValueError:
+        messagebox.showerror("Input Error", "Please enter a complex number (e.g., 3+4j) and a positive integer.")
 
 root = tk.Tk()
 root.title("Complex Number Calculator")
@@ -157,8 +181,20 @@ tk.Label(root, text="Square Root").grid(row=10, column=2, columnspan=2, pady=10)
 tk.Label(root, text="Give number:").grid(row=11, column=2, padx=10, pady=5)
 entry12 = tk.Entry(root)
 entry12.grid(row=11, column=3, padx=10, pady=5)
-tk.Button(root, text="Square Root", command=root).grid(row=12, column=2, columnspan=2, pady=5)
+tk.Button(root, text="Square Root", command=square_root).grid(row=12, column=2, columnspan=2, pady=5)
 root_label = tk.Label(root, text="Result: ")
 root_label.grid(row=13, column=2, columnspan=2, pady=5)
+
+tk.Label(root, text="n-th Root").grid(row=10, column=4, columnspan=2, pady=10)
+tk.Label(root, text="Complex number:").grid(row=11, column=4, padx=10, pady=5)
+entry_root = tk.Entry(root)
+entry_root.grid(row=11, column=5, padx=10, pady=5)
+tk.Label(root, text="Root degree (n):").grid(row=12, column=4, padx=10, pady=5)
+entry_n = tk.Entry(root)
+entry_n.grid(row=12, column=5, padx=10, pady=5)
+tk.Button(root, text="Calculate n-th Root", command=nth_root).grid(row=13, column=4, columnspan=2, pady=5)
+nth_root_label = tk.Label(root, text="Results: ")
+nth_root_label.grid(row=14, column=4, columnspan=2, pady=5)
+
 
 root.mainloop()

@@ -61,10 +61,6 @@ def trigonometric():
     except ValueError:
         messagebox.showerror("Input error!", "Please enter valid complex numbers like (4+5j)!")
 
-def calc_trig(z):
-    return trigonometric()
-
-
 def exponentiation():
     try:
         z11 = complex(entry11.get())
